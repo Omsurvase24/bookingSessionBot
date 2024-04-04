@@ -20,17 +20,16 @@ async def handle_request(request: Request):
         name = parameters.get('person', {}).get('name')
         phone_number = parameters.get('phone-number')
         address = parameters.get('address')
-        # Call the insert_booking function
-        db_helper.insert_booking(name, phone_number, address, None)
-        return book_session(parameters, session_id)
+        # Call the insert_client_detail function
+        db_helper.insert_client_detail(name, phone_number, address)
+        fulfillment_text = f'''Received {name}, {
+            phone_number}, {address} in the backend'''
     elif intent == "book.date":
         date = parameters.get('date-time')
-        name = None  # Since 'name' is not available here
-        phone_number = None  # Since 'phone_number' is not available here
-        address = None  # Since 'address' is not available here
-        # Call the insert_booking function
-        db_helper.insert_booking(name, phone_number, address, date)
-        return end_booking(parameters, session_id)
+        # Call the insert_date function
+        db_helper.insert_date(date)
+        fulfillment_text = f'''Received {date}
+            in the backend for end booking'''
 
     return JSONResponse(content={"fulfillmentText": fulfillment_text})
 
