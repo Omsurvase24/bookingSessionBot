@@ -20,47 +20,44 @@ async def handle_request(request: Request):
         name = parameters.get('person', {}).get('name')
         phone_number = parameters.get('phone-number')
         address = parameters.get('address')
-        # Call the insert_client_detail function
         db_helper.insert_client_detail(name, phone_number, address)
         fulfillment_text = f'''Received {name}, {
-            phone_number}, {address} in the backend'''
+            phone_number}, {address}. Please enter date when you want to book the session'''
     elif intent == "book.date":
         date = parameters.get('date-time')
-        # Call the insert_date function
         db_helper.insert_date(date)
-        fulfillment_text = f'''Received {date}
-            in the backend for end booking'''
+        fulfillment_text = f'''Your booking has been done on {date}.'''
 
     return JSONResponse(content={"fulfillmentText": fulfillment_text})
 
 
-def book_session(parameters: dict, session_id):
-    phone_number = parameters.get('phone-number')
-    name = parameters.get('person', {}).get('name')
-    address = parameters.get('address')
+# def book_session(parameters: dict, session_id):
+#     phone_number = parameters.get('phone-number')
+#     name = parameters.get('person', {}).get('name')
+#     address = parameters.get('address')
 
-    details = {
-        "phone_number": phone_number,
-        "name": name,
-        "address": address
-    }
+#     details = {
+#         "phone_number": phone_number,
+#         "name": name,
+#         "address": address
+#     }
 
-    if name and phone_number and address:
-        fulfillment_text = f'''Received {name} and {
-            phone_number} and {address} in the backend'''
+#     if name and phone_number and address:
+#         fulfillment_text = f'''Received {name} and {
+#             phone_number} and {address} in the backend'''
 
-    return JSONResponse(content={
-        "fulfillmentText": fulfillment_text
-    })
+#     return JSONResponse(content={
+#         "fulfillmentText": fulfillment_text
+#     })
 
 
-def end_booking(parameters: dict, session_id):
-    date = parameters.get('date-time')
+# def end_booking(parameters: dict, session_id):
+#     date = parameters.get('date-time')
 
-    if date:
-        fulfillment_text = f'''Received {date}
-            in the backend for end booking'''
-    else:
-        fulfillment_text = "Missing date parameter for end booking."
+#     if date:
+#         fulfillment_text = f'''Received {date}
+#             in the backend for end booking'''
+#     else:
+#         fulfillment_text = "Missing date parameter for end booking."
 
-    return JSONResponse(content={"fulfillmentText": fulfillment_text})
+#     return JSONResponse(content={"fulfillmentText": fulfillment_text})

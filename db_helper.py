@@ -1,4 +1,3 @@
-# db_helper.py
 import mysql.connector
 
 
@@ -22,10 +21,10 @@ def insert_client_detail(name, phone_number, address):
         cursor.close()
         cnx.close()
 
-        return True  # Insertion successful
+        return True
     except mysql.connector.Error as err:
         print("Error:", err)
-        return False  # Insertion failed
+        return False
 
 
 def insert_date(date):
@@ -48,7 +47,7 @@ def insert_date(date):
         cursor.close()
         cnx.close()
 
-        return True  # Insertion successful
+        return True
     except mysql.connector.Error as err:
         print("Error:", err)
-        return False  # Insertion failed
+        return False
